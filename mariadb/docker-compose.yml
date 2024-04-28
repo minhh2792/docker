@@ -1,0 +1,20 @@
+services:
+  maria:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    networks:
+      - docker-network
+    environment:
+      MARIADB_ROOT_PASSWORD: "securerootpassword"
+      MARIADB_USER: "kiwi"
+      MARIADB_PASSWORD: "kiwi@123"
+      MARIADB_DATABASE: "maria"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb-data:/var/lib/mysql:Z
+networks:
+  docker-network:
+    name: docker-network
+    external: true
