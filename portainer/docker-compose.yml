@@ -3,8 +3,6 @@ services:
     image: portainer/portainer-ce:alpine
     container_name: portainer
     restart: always
-    networks:
-      - docker-network
     security_opt:
       - no-new-privileges:true
     volumes:
@@ -13,7 +11,3 @@ services:
       - ./portainer-data:/data
     ports:
       - 9000:9000
-networks:
-  docker-network:
-    name: docker-network
-    external: true

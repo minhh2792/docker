@@ -6,19 +6,28 @@ services:
     stdin_open: true
     ports:
       - "25565:25565"
-    networks:
-      - docker-network
     environment:
       MEMORY: "2G"
       EULA: "TRUE"
-      TYPE: "PURPUR"
+      TYPE: "PUFFERFISH"
+      VERSION: "1.20.4"
       USE_AIKAR_FLAGS: true
       ENABLE_ROLLING_LOGS: true
       USE_SIMD_FLAGS: true
       ONLINE_MODE: FALSE
+      MODRINTH_PROJECTS: viaversion,viarewind,viabackwards
+      SPIGET_RESOURCES: 34315,28140,57242 # LuckPerms, Vault, Spark
     volumes:
       - ./mc-data:/data
-networks:
-  docker-network:
-    name: docker-network
-    external: true
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: "securerootpassword"
+      MARIADB_USER: "kiwi"
+      MARIADB_PASSWORD: "kiwi@123"
+      MARIADB_DATABASE: "maria"
+    volumes:
+      - ./mariadb-data:/var/lib/mysql:Z
