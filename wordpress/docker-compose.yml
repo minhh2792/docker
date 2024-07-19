@@ -1,0 +1,33 @@
+services:
+  db_wp:
+    image: mariadb
+    container_name: db_wp
+    environment:
+      MARIADB_ROOT_PASSWORD: "securerootpassword"
+      MARIADB_USER: "kiwi"
+      MARIADB_PASSWORD: "kiwi@123"
+      MARIADB_DATABASE: "wordpress"
+      TZ: "Asia/Ho_Chi_Minh"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_wp:/var/lib/mysql
+  
+  wordpress:
+    depends_on:
+      - db_wp
+    image: wordpress:latest
+    container_name: wordpress
+    environment:
+      WORDPRESS_DB_HOST: mariadb_wp
+      WORDPRESS_DB_USER: kiwi
+      WORDPRESS_DB_PASSWORD: kiwi@123
+      WORDPRESS_DB_NAME: wordpress
+    ports:
+      - "8080:80"
+    volumes:
+      - wordpress:/var/www/html
+
+volumes:
+  wordpress:
+  db_wp:

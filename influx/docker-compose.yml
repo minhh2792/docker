@@ -1,0 +1,11 @@
+services:
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./influx/config:/etc/influxdb2
+      - ./influx/db:/var/lib/influxdb2

@@ -8,6 +8,9 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./portainer-data:/data
+      - portainer:/data
     ports:
       - 9000:9000
+
+volumes:
+  portainer:

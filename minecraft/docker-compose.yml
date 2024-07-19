@@ -19,15 +19,3 @@ services:
       SPIGET_RESOURCES: 34315,28140,57242 # LuckPerms, Vault, Spark
     volumes:
       - ./mc-data:/data
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    ports:
-      - "3306:3306"
-    environment:
-      MARIADB_ROOT_PASSWORD: "securerootpassword"
-      MARIADB_USER: "kiwi"
-      MARIADB_PASSWORD: "kiwi@123"
-      MARIADB_DATABASE: "maria"
-    volumes:
-      - ./mariadb-data:/var/lib/mysql:Z
