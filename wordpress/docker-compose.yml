@@ -8,6 +8,8 @@ services:
       MARIADB_PASSWORD: "kiwi@123"
       MARIADB_DATABASE: "wordpress"
       TZ: "Asia/Ho_Chi_Minh"
+    networks:
+      - web
     ports:
       - "3306:3306"
     volumes:
@@ -19,15 +21,20 @@ services:
     image: wordpress:latest
     container_name: wordpress
     environment:
-      WORDPRESS_DB_HOST: mariadb_wp
+      WORDPRESS_DB_HOST: db_wp
       WORDPRESS_DB_USER: kiwi
       WORDPRESS_DB_PASSWORD: kiwi@123
       WORDPRESS_DB_NAME: wordpress
+    networks:
+      - web
     ports:
-      - "8080:80"
+      - "90:80"
     volumes:
       - wordpress:/var/www/html
 
 volumes:
   wordpress:
   db_wp:
+networks:
+  web:
+    external: true
